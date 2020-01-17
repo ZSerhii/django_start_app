@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block html_title %}
+    Feedbacks
+{% endblock html_title %}
+
+{% block content %}
+    <h2>Feedbacks</h2>
+
+    {% if has_contacted %}
+        <p>Дякуємо за Ваш відгук! Після модерації він з'явиться внизу!</p>
+    {% endif %}
+
+    <ul>
+        {% for feedback in feedbacks %}
+            <li>[{{feedback.created|date:"d E Y H:i"}}] {{feedback.name}}: 
+                 {{feedback.text|truncatechars:25}} 
+                ({{feedback.created|timesince}} тому)</li>
+        {% empty %}
+            <li><a href='../contacts'>Будь першим!</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

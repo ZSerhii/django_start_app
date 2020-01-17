@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block html_title %}
+    {{ block.super }} - Home
+{% endblock html_title %}
+
+{% block content %}
+    <h2>Привіт, {{name}} ({{user.email}})!</h2>
+    <p>Сьогодні: {{now|date:"d E Y H:i"}}</p>
+    <p>Новий рік: {{new_year_date|timesince}}</p>
+
+    <h2>My shufle students:</h2>
+    <ol>
+    {% for name in students %}
+        <li>{{name}}</li>    
+    {% endfor %}
+    </ol>
+    
+    <p>
+    {% if message %}
+    Massage: <strong>{{message}}</strong>
+    {% else %}
+    No message
+    {% endif %}
+    </p>
+
+    <br><a href="about/">About</a>
+    <br><a href="contacts/">Contacts</a>
+    <br><a href="admin/">Admin</a>
+    <br><a href="feedbacks/">Feedbacks</a>
+{% endblock content %}
