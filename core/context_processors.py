@@ -1,5 +1,5 @@
 from random import shuffle  # , choice
-
+from django.conf import settings
 
 def students_names(request):
     students = ['Serhii', 'Andrii', 'Bohdan', 'Ira', 'Alex', 'Roman']
@@ -20,3 +20,7 @@ def students_names(request):
     #         used_dict[index] = 0
 
     return {'students': students}
+
+
+def base_url(request):
+    return {'base_url': settings.BASE_URL}

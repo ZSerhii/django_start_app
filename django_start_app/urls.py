@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import RedirectView
 
-from core.views import django_start_page_view, about_page_view, contacts_page_view, feedbacks_page_view
+from core.views import django_start_page_view, about_page_view, contacts_page_view, feedbacks_page_view, zno_bots_page_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +26,5 @@ urlpatterns = [
     path('contacts/', contacts_page_view, name='contacts'),
     path('feedbacks/', feedbacks_page_view, name='feedbacks'),
     path('feedbacks-for-all-users/', RedirectView.as_view(permanent=False, url='/feedbacks/')),
+    path('bots/', zno_bots_page_view, name='bots'),
 ]

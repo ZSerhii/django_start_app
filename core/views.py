@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, date
 from core.forms import ContactUsForm
-from core.models import Feedback
+from core.models import Feedback, Subject, Messanger, Bot
 
 
 def django_start_page_view(request):
@@ -40,7 +40,7 @@ def contacts_page_view(request):
             Feedback.objects.create(name=request.POST.get("name"), text=last_message)
 
             # return redirect('feedbacks')
-            
+
             response = redirect('feedbacks')
             response['Location'] += '?from=contacts-us'
 
@@ -62,5 +62,18 @@ def feedbacks_page_view(request):
     return render(request, 'feedbacks.html', context={
         'feedbacks': feedbacks,
         'has_contacted': has_contacted,
+        'now': datetime.now()
+    })
+
+
+def zno_bots_page_view(request):
+    subjects = Subject.objects.filter(is_active=True)
+    messangers = Messanger.objects.filter(is_active=True)
+    bots = Bot.objects.filter(is_active=True)
+
+    return render(request, 'bots.html', context={
+        'subjects': subjects,
+        'messangers': messangers,
+        'bots': bots,
         'now': datetime.now()
     })

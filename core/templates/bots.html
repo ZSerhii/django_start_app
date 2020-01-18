@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block html_title %}
+    Боти ЗНО
+{% endblock html_title %}
+
+{% block content %}
+    <h2>Боти ЗНО</h2>
+
+    <h3>Предмети:</h3>
+    <ol>
+    {% for subject in subjects %}
+        <li>{{subject.name}}</li>    
+    {% endfor %}
+    </ol>
+
+    <h3>Месенджери:</h3>
+    <ul>
+    {% for messanger in messangers %}
+        <li>{{messanger.name}}</li>    
+    {% endfor %}
+    </ul>
+
+    <h3>Боти ЗНО:</h3>
+    <ul>
+    {% for bot in bots %}
+        {% comment %} https://t.me/<bot_name> {% endcomment %}
+        <li>{{bot.messanger}}: <a href="tg://resolve?domain={{bot.name|slice:"1:"}}">{{bot.name}}</a></li>    
+    {% endfor %}
+    </ul>
+{% endblock content %}

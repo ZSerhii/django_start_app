@@ -12,9 +12,17 @@
 </head>
 <body>
     <header>
-        <h1>My First Website!</h1>
+        <table bgcolor="#c0c0c0"  width="100%">
+            <tr>
+                <td><h1><a href="{{ base_url }}">My First Website!</a></h1></td>
+                <td><a href="{{ base_url }}/bots/">Боти ЗНО</a></td>
+                <td><a href="{{ base_url }}/contacts/">Contacts</a></td>
+                <td><a href="{{ base_url }}/feedbacks/">Feedbacks</a></td>
+                <td><a href="{{ base_url }}/about/">About</a></td>
+                <td><a href="{{ base_url }}/admin/">Admin</a></td>
+            </tr>
+        </table>
     </header>
-
     {% block content %}
 
     {% endblock content %}
