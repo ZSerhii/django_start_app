@@ -36,8 +36,18 @@ class Messanger(models.Model):
         return f'{self.name}'
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=50, default='')
+    email = models.CharField(max_length=50, default='')
+    webpage = models.CharField(max_length=50, default='')
+
+    def __str__(self):
+        return f'Author: {self.name}'
+
+
 class Bot(models.Model):
     name = models.CharField(max_length=32, default='')
     subject = models.ForeignKey(Subject, models.PROTECT)
     messanger = models.ForeignKey(Messanger, models.PROTECT)
     is_active = models.BooleanField(default=False)
+    author = models.ForeignKey(Author, on_delete=models.PROTECT, null=True)

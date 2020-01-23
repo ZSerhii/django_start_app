@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, date
 from core.forms import ContactUsForm
-from core.models import Feedback, Subject, Messanger, Bot
+from core.models import Feedback, Subject, Messanger, Author, Bot
 
 
 def django_start_page_view(request):
@@ -67,13 +67,31 @@ def feedbacks_page_view(request):
 
 
 def zno_bots_page_view(request):
+    author_filter = request.GET.get('author')
+
     subjects = Subject.objects.filter(is_active=True)
     messangers = Messanger.objects.filter(is_active=True)
-    bots = Bot.objects.filter(is_active=True)
+
+    if author_filter:
+        # author = Author.objects.filter(name=author_filter).first()
+        # bots = Bot.objects.filter(is_active=True, author=author)
+
+        bots = Bot.objects.filter(is_active=True, author__name__icontains=author_filter)
+    else:
+        bots = Bot.objects.filter(is_active=True)
 
     return render(request, 'bots.html', context={
         'subjects': subjects,
         'messangers': messangers,
         'bots': bots,
+        'now': datetime.now()
+    })
+
+
+def bot_page_view(request, bot_name):
+    bot = Bot.objects.filter(name__icontains=bot_name, is_active=True).first()
+
+    return render(request, 'bot.html', context={
+        'bot': bot,
         'now': datetime.now()
     })

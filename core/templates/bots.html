@@ -25,7 +25,13 @@
     <ul>
     {% for bot in bots %}
         {% comment %} https://t.me/<bot_name> {% endcomment %}
-        <li>{{bot.messanger}}: <a href="tg://resolve?domain={{bot.name|slice:"1:"}}">{{bot.name}}</a></li>    
+        <li>
+            <a href="tg://resolve?domain={{bot.name|slice:"1:"}}">{{bot.messanger}}</a>: 
+            <a href="/bot/{{bot.name|slice:"1:"}}">{{bot.name}}</a>
+            <br>
+            {% comment %}Автор: <a href='mailto:{{bot.author.email}}'>{{bot.author.name}}</a> {% endcomment %}
+            Автор: <a href='/bots?author={{bot.author.name}}'>{{bot.author.name}}</a>
+        </li>    
     {% endfor %}
     </ul>
 {% endblock content %}
